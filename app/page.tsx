@@ -6,37 +6,37 @@ export default function Page() {
     <main className="relative min-h-screen overflow-hidden bg-black">
       {/* Light + atmosphere */}
       <div className="pointer-events-none absolute inset-0">
-        {/* soft center light */}
-        <div className="absolute left-1/2 top-[42%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_60%)]" />
+        {/* soft center glow (stronger) */}
+        <div className="absolute left-1/2 top-[42%] h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.14),rgba(255,255,255,0.00)_62%)]" />
 
-        {/* subtle directional sweep (top-right -> center) */}
-        <div className="absolute left-1/2 top-[30%] h-[520px] w-[980px] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.07),rgba(255,255,255,0.00)_70%)] blur-[2px]" />
+        {/* subtle directional sweep (stronger + a touch blur) */}
+        <div className="absolute left-1/2 top-[30%] h-[560px] w-[1040px] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_72%)] blur-[3px]" />
 
-        {/* gentle vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.00)_0%,rgba(0,0,0,0.55)_55%,rgba(0,0,0,0.88)_100%)]" />
+        {/* gentler vignette so the light can exist */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.00)_0%,rgba(0,0,0,0.46)_58%,rgba(0,0,0,0.78)_100%)]" />
       </div>
 
       {/* Center stage: logo sits on a subtle surface */}
       <div className="pointer-events-none absolute inset-0 grid place-items-center">
-        <div className="relative w-[min(780px,92vw)]">
-          {/* “surface/ledge” */}
-          <div className="absolute left-1/2 top-[64%] h-px w-[78%] -translate-x-1/2 bg-white/14" />
-          <div className="absolute left-1/2 top-[64%] h-12 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),rgba(255,255,255,0.00)_70%)] blur-[6px]" />
+        <div className="relative w-[min(820px,92vw)]">
+          {/* “ledge” line — we’ll anchor the logo to this */}
+          <div className="absolute left-1/2 top-[66%] h-px w-[78%] -translate-x-1/2 bg-white/16" />
+          <div className="absolute left-1/2 top-[66%] h-12 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_70%)] blur-[8px]" />
 
-          {/* Logo (smaller, grounded) */}
-          <div className="relative mx-auto w-[min(520px,72vw)] translate-y-[-4%]">
+          {/* Logo (25% smaller + positioned to rest ON the line) */}
+          <div className="absolute left-1/2 top-[66%] w-[min(390px,64vw)] -translate-x-1/2 -translate-y-full">
             <Image
               src="/G-large.png"
               alt="G-SPAN"
               width={1200}
               height={1200}
               priority
-              className="h-auto w-full opacity-95 drop-shadow-[0_40px_70px_rgba(0,0,0,0.70)]"
+              className="h-auto w-full opacity-95 drop-shadow-[0_34px_64px_rgba(0,0,0,0.72)]"
             />
           </div>
 
-          {/* contact shadow under logo */}
-          <div className="absolute left-1/2 top-[66%] h-10 w-[52%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.65),rgba(0,0,0,0.00)_70%)] blur-[10px]" />
+          {/* contact shadow (just under the line) */}
+          <div className="absolute left-1/2 top-[67.25%] h-10 w-[52%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.62),rgba(0,0,0,0.00)_70%)] blur-[12px]" />
         </div>
       </div>
 
