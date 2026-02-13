@@ -4,44 +4,64 @@ import { useState } from "react";
 
 export default function EmailCapture() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "ok">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">(
+    "idle"
+  );
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const clean = email.trim();
 
-    // Placeholder: wire to Brevo/Klaviyo/etc later.
-    if (email.trim().length > 3) {
+    if (!clean) return;
+
+    try {
+      setStatus("loading");
+
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: clean }),
+      });
+
+      if (!res.ok) throw new Error("Bad response");
       setStatus("ok");
       setEmail("");
+    } catch {
+      setStatus("err");
+    } finally {
+      setTimeout(() => setStatus("idle"), 2500);
     }
   }
 
   return (
-    <div className="mt-5">
-      <form onSubmit={onSubmit} className="flex w-full max-w-md gap-2">
-        <input
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="h-11 flex-1 rounded-md bg-white/5 px-3 text-sm text-white outline-none ring-1 ring-white/10 placeholder:text-white/40 focus:ring-white/25"
-          required
-        />
-        <button
-          type="submit"
-          className="h-11 rounded-md px-4 text-sm font-medium text-black bg-white hover:bg-white/90"
-        >
-          Stay informed
-        </button>
-      </form>
+    <form onSubmit={onSubmit} className="mt-6 flex w-full max-w-xl gap-3">
+      <label className="sr-only" htmlFor="email">
+        Email address
+      </label>
 
-      {status === "ok" && (
-        <div className="mt-3 text-xs text-white/70">
-          Got it. You’re on the list.
-        </div>
-      )}
-    </div>
+      <input
+        id="email"
+        type="email"
+        inputMode="email"
+        autoComplete="email"
+        placeholder="Email address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="h-11 flex-1 rounded-xl border border-white/10 bg-black/35 px-4 text-sm text-white placeholder:text-white/40 outline-none backdrop-blur-md focus:border-white/25"
+      />
+
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="h-11 shrink-0 rounded-xl bg-white px-5 text-sm font-medium text-black transition hover:bg-white/90 disabled:opacity-60"
+      >
+        Stay informed
+      </button>
+
+      <span
+        className="sr-only"
+        aria-live="polite"
+      >{`${status}`}</span>
+    </form>
   );
 }
