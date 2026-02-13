@@ -4,32 +4,25 @@ import { useState } from "react";
 
 export default function EmailCapture() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">(
-    "idle"
-  );
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const clean = email.trim();
+    if (!email.trim()) return;
 
-    if (!clean) return;
-
+    setStatus("loading");
     try {
-      setStatus("loading");
-
       const res = await fetch("/api/subscribe", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: clean }),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) throw new Error("Bad response");
-      setStatus("ok");
-      setEmail("");
+      if (!res.ok) throw new Error("bad_response");
+
+      setStatus("success");
     } catch {
-      setStatus("err");
-    } finally {
-      setTimeout(() => setStatus("idle"), 2500);
+      setStatus("error");
     }
   }
 
@@ -47,21 +40,20 @@ export default function EmailCapture() {
         placeholder="Email address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="h-11 flex-1 rounded-xl border border-white/10 bg-black/35 px-4 text-sm text-white placeholder:text-white/40 outline-none backdrop-blur-md focus:border-white/25"
+        className="h-12 flex-1 rounded-2xl border border-white/10 bg-black/35 px-4 text-white outline-none backdrop-blur-sm placeholder:text-white/35 focus:border-white/20"
       />
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="h-11 shrink-0 rounded-xl bg-white px-5 text-sm font-medium text-black transition hover:bg-white/90 disabled:opacity-60"
+        className="h-12 rounded-2xl bg-white px-5 font-medium text-black transition active:scale-[0.99] disabled:opacity-60"
       >
-        Stay informed
+        {status === "success" ? "You’re in" : status === "loading" ? "Sending…" : "Stay informed"}
       </button>
 
-      <span
-        className="sr-only"
-        aria-live="polite"
-      >{`${status}`}</span>
+      {status === "error" ? (
+        <p className="sr-only">Something went wrong.</p>
+      ) : null}
     </form>
   );
 }
