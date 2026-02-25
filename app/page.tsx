@@ -55,9 +55,6 @@ export default function Page() {
 
           <EmailCapture />
 
-          <p className="mt-4 text-sm text-white/40">
-            If you landed here from a badge, you&apos;re early — that&apos;s the point.
-          </p>
         </div>
       </div>
     </main>
