@@ -17,14 +17,14 @@ export default function Page() {
       </div>
 
       {/* Center stage: logo sits on a subtle surface */}
-      <div className="pointer-events-none absolute inset-0 grid place-items-center">
+      <div className="pointer-events-none absolute inset-0 grid place-items-center translate-y-[15vh]">
         <div className="relative w-[min(820px,92vw)]">
           {/* “ledge” line — we’ll anchor the logo to this */}
           <div className="absolute left-1/2 top-[66%] h-px w-[78%] -translate-x-1/2 bg-white/16" />
           <div className="absolute left-1/2 top-[66%] h-12 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_70%)] blur-[8px]" />
 
           {/* Logo (25% smaller + positioned to rest ON the line) */}
-          <div className="absolute left-1/2 top-[72%] w-[min(390px,64vw)] -translate-x-1/2 -translate-y-full">
+          <div className="absolute left-1/2 top-[66%] w-[min(390px,64vw)] -translate-x-1/2 -translate-y-full">
             <Image
               src="/G-large.png"
               alt="G-SPAN"
@@ -36,7 +36,7 @@ export default function Page() {
           </div>
 
           {/* contact shadow (just under the line) */}
-          <div className="absolute left-1/2 top-[73.25%] h-10 w-[52%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.62),rgba(0,0,0,0.00)_70%)] blur-[12px]" />
+          <div className="absolute left-1/2 top-[67.25%] h-10 w-[52%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.62),rgba(0,0,0,0.00)_70%)] blur-[12px]" />
         </div>
       </div>
 
@@ -54,7 +54,6 @@ export default function Page() {
           </p>
 
           <EmailCapture />
-
         </div>
       </div>
     </main>
