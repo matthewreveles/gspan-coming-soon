@@ -10,7 +10,7 @@ export default function Page() {
         <div className="absolute left-1/2 top-[42%] h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.14),rgba(255,255,255,0.00)_62%)]" />
 
         {/* subtle directional sweep (stronger + a touch blur) */}
-        <div className="absolute left-1/2 top-[30%] h-[560px] w-[1040px] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_72%)] blur-[3px]" />
+        <div className="absolute left-1/2 top-[50%] h-[560px] w-[1040px] -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_72%)] blur-[6px]" />
 
         {/* gentler vignette so the light can exist */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.00)_0%,rgba(0,0,0,0.46)_58%,rgba(0,0,0,0.78)_100%)]" />
