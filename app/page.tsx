@@ -21,7 +21,7 @@ export default function Page() {
         <div className="relative w-[min(820px,92vw)]">
           {/* “ledge” line — we’ll anchor the logo to this */}
           <div className="absolute left-1/2 top-[66%] h-px w-[78%] -translate-x-1/2 bg-white/16" />
-          <div className="absolute left-1/2 top-[66%] h-12 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_70%)] blur-[12px]" />
+          <div className="absolute left-1/2 top-[66%] h-12 w-[78%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.10),rgba(255,255,255,0.00)_70%)] blur-[24px]" />
 
           {/* Logo (25% smaller + positioned to rest ON the line) */}
           <div className="absolute left-1/2 top-[66%] w-[min(390px,64vw)] -translate-x-1/2 -translate-y-full">
